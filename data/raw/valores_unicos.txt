@@ -4,6 +4,11 @@ Attrition_Flag
 Existing Customer    8500
 Attrited Customer    1627
 
+Gender:
+Gender
+F    5358
+M    4769
+
 Education_Level:
 Education_Level
 Graduate         3128
