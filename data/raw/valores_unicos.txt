@@ -1,0 +1,38 @@
+
+Attrition_Flag:
+Attrition_Flag
+Existing Customer    8500
+Attrited Customer    1627
+
+Education_Level:
+Education_Level
+Graduate         3128
+High School      2013
+Unknown          1519
+Uneducated       1487
+College          1013
+Post-Graduate     516
+Doctorate         451
+
+Marital_Status:
+Marital_Status
+Married     4687
+Single      3943
+Unknown      749
+Divorced     748
+
+Income_Category:
+Income_Category
+Less than $40K    3561
+$40K - $60K       1790
+$80K - $120K      1535
+$60K - $80K       1402
+Unknown           1112
+$120K +            727
+
+Card_Category:
+Card_Category
+Blue        9436
+Silver       555
+Gold         116
+Platinum      20
