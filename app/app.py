@@ -1184,3 +1184,223 @@ with col_der:
             implicación directa en la tasa de churn de ninguno de los dos grupos.
         </p>
     """, unsafe_allow_html=True)
+
+# ── SECCIÓN 6: Perfil del churner ───────────────────────────────────────────
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+st.markdown("""
+    <p class="hero-label">Sección 06</p>
+    <h2 style="color:#FFFFFF; font-size:28px; font-weight:700; margin-bottom:8px;">
+        Perfil del cliente que cancela
+    </h2>
+    <p class="intro-text" style="margin-bottom:32px;">
+        Tras analizar más de 10,000 clientes a través de variables demográficas,
+        de vinculación y de comportamiento, emerge un perfil claro y consistente.
+        No es quién es el cliente lo que predice la cancelación, es cómo interactúa con el producto.
+    </p>
+""", unsafe_allow_html=True)
+
+# ── 6.1 Retrato robot ────────────────────────────────────────────────────────
+st.markdown("""
+    <div style="background: linear-gradient(135deg, #0D1B2A 0%, #1B2A3B 100%);
+                border-radius: 16px; padding: 40px 48px;
+                border: 1px solid #263545; margin-bottom: 40px;">
+        <p style="color:#2196F3; font-size:11px; font-weight:700;
+                  letter-spacing:3px; text-transform:uppercase; margin-bottom:24px;">
+            Retrato robot
+        </p>
+        <p style="color:#ECEFF1; font-size:17px; line-height:1.9; margin:0;">
+            Cliente con <strong style="color:#E53935">1-2 productos contratados</strong>
+            con el banco, que usa la tarjeta de forma
+            <strong style="color:#E53935">esporádica</strong>
+            (menos de 50 transacciones anuales) y que
+            <strong style="color:#E53935">no genera deuda revolving</strong>.
+            A lo largo del año muestra una
+            <strong style="color:#E53935">caída progresiva en la frecuencia de uso</strong>
+            y ha <strong style="color:#E53935">contactado con el banco en múltiples ocasiones</strong>
+            antes de cancelar. No hay perfil demográfico diferencial:
+            puede tener cualquier edad, género, nivel educativo o renta.
+        </p>
+    </div>
+""", unsafe_allow_html=True)
+
+# ── 6.2 Señales de alerta ────────────────────────────────────────────────────
+st.markdown("""
+    <h3 style="color:#FFFFFF; font-size:20px; font-weight:700; margin-bottom:24px;">
+        Señales de alerta tempranas
+    </h3>
+""", unsafe_allow_html=True)
+
+col1, col2, col3, col4 = st.columns(4)
+
+alertas = [
+    {
+        'icono': '📉',
+        'titulo': 'Caída de transacciones',
+        'valor': 'Ratio Q4/Q1 < 0.53',
+        'texto': 'La frecuencia de uso cae progresivamente antes de que se produzca la cancelación.'
+    },
+    {
+        'icono': '📞',
+        'titulo': 'Contactos frecuentes',
+        'texto': 'Múltiples contactos con el banco señalan fricción o insatisfacción no resuelta.',
+        'valor': '3+ contactos en 12 meses'
+    },
+    {
+        'icono': '💳',
+        'titulo': 'Sin uso de crédito',
+        'valor': 'Saldo revolving = 0',
+        'texto': 'El cliente que no usa el crédito muestra una desconexión profunda con el producto.'
+    },
+    {
+        'icono': '🔗',
+        'titulo': 'Baja vinculación',
+        'valor': '1-2 productos contratados',
+        'texto': 'Sin el colchón de otros productos, la tarjeta es el único vínculo con el banco.'
+    }
+]
+
+for col, alerta in zip([col1, col2, col3, col4], alertas):
+    with col:
+        st.markdown(f"""
+            <div style="background:#1B2A3B; border-radius:12px; padding:24px;
+                        border:1px solid #263545; height:220px;">
+                <div style="font-size:28px; margin-bottom:12px;">{alerta['icono']}</div>
+                <p style="color:#2196F3; font-size:11px; font-weight:700;
+                          letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">
+                    {alerta['titulo']}
+                </p>
+                <p style="color:#FFFFFF; font-size:14px; font-weight:600; margin-bottom:8px;">
+                    {alerta['valor']}
+                </p>
+                <p style="color:#78909C; font-size:13px; line-height:1.6; margin:0;">
+                    {alerta['texto']}
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+
+# ── 6.3 Matriz de correlaciones interactiva ──────────────────────────────────
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+st.markdown("""
+    <h3 style="color:#FFFFFF; font-size:20px; font-weight:700; margin-bottom:8px;">
+        Mapa de correlaciones
+    </h3>
+    <p style="color:#90A4AE; font-size:14px; line-height:1.7; margin-bottom:24px;">
+        Correlaciones entre las variables numéricas del dataset.
+        Pasa el cursor sobre cada celda para ver el valor exacto.
+        Las correlaciones con <code style="color:#2196F3;">Attrition_Flag</code>
+        resumen el poder predictivo de cada variable sobre el churn.
+        Se excluyen variables redundantes identificadas durante el análisis:
+        <code style="color:#78909C;">Avg_Open_To_Buy</code> (derivada de
+        <code style="color:#78909C;">Credit_Limit</code> y
+        <code style="color:#78909C;">Total_Revolving_Bal</code>),
+        <code style="color:#78909C;">Revolving_Use</code> (versión binaria de
+        <code style="color:#78909C;">Total_Revolving_Bal</code>),
+        <code style="color:#78909C;">Avg_Trans_Amt</code> (correlación 0.91
+        con <code style="color:#78909C;">Total_Trans_Amt</code>) y
+        <code style="color:#78909C;">Gender</code> (variable binaria cuya
+        correlación con variables continuas puede malinterpretarse).
+    </p>
+""", unsafe_allow_html=True)
+
+excluir = [
+    'Avg_Open_To_Buy',
+    'Revolving_Use',
+    'Avg_Trans_Amt',
+    'Gender'
+]
+numericas = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+numericas_filtradas = [col for col in numericas if col not in excluir]
+
+corr_matrix = df[numericas_filtradas].corr().round(2)
+
+fig_corr = go.Figure(data=go.Heatmap(
+    z=corr_matrix.values,
+    x=corr_matrix.columns.tolist(),
+    y=corr_matrix.index.tolist(),
+    colorscale=[
+        [0.0, '#E53935'],
+        [0.5, '#1B2A3B'],
+        [1.0, '#2196F3']
+    ],
+    zmid=0,
+    text=corr_matrix.values,
+    texttemplate='%{text:.2f}',
+    textfont=dict(size=10, color='#ECEFF1'),
+    hoverongaps=False
+))
+fig_corr.update_layout(
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    font_color='#B0BEC5',
+    height=550,
+    xaxis=dict(tickangle=-45, tickfont=dict(size=11)),
+    yaxis=dict(tickfont=dict(size=11)),
+    margin=dict(t=20, b=80, l=120)
+)
+st.plotly_chart(fig_corr, use_container_width=True)
+
+# ── 6.4 Explorador de datos ──────────────────────────────────────────────────
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+with st.expander("🔍 Explorar el dataset completo"):
+    col_filtro1, col_filtro2, col_filtro3 = st.columns(3)
+
+    with col_filtro1:
+        estado = st.selectbox(
+            'Estado del cliente',
+            options=['Todos', 'Activo (0)', 'Cancelado (1)']
+        )
+    with col_filtro2:
+        segmento = st.selectbox(
+            'Segmento de actividad',
+            options=['Todos'] + df['Activity_Segment'].dropna().unique().tolist()
+        )
+    with col_filtro3:
+        renta = st.selectbox(
+            'Nivel de ingresos',
+            options=['Todos'] + df['Income_Category'].dropna().unique().tolist()
+        )
+
+    df_filtrado = df.copy()
+    if estado == 'Activo (0)':
+        df_filtrado = df_filtrado[df_filtrado['Attrition_Flag'] == 0]
+    elif estado == 'Cancelado (1)':
+        df_filtrado = df_filtrado[df_filtrado['Attrition_Flag'] == 1]
+    if segmento != 'Todos':
+        df_filtrado = df_filtrado[df_filtrado['Activity_Segment'] == segmento]
+    if renta != 'Todos':
+        df_filtrado = df_filtrado[df_filtrado['Income_Category'] == renta]
+
+    st.markdown(f"""
+        <p style="color:#78909C; font-size:13px; margin-bottom:8px;">
+            Mostrando <strong style="color:#FFFFFF">{len(df_filtrado):,}</strong>
+            de <strong style="color:#FFFFFF">{len(df):,}</strong> clientes
+        </p>
+    """, unsafe_allow_html=True)
+
+    st.dataframe(
+        df_filtrado.reset_index(drop=True),
+        use_container_width=True,
+        height=350
+    )
+
+# ── Footer ───────────────────────────────────────────────────────────────────
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+st.markdown("""
+    <div style="text-align:center; padding:24px 0 40px 0;">
+        <p style="color:#ECEFF1; font-size:14px; font-weight:600; margin-bottom:8px;">
+            Guillermo Rodríguez Godoy
+        </p>
+        <p style="color:#455A64; font-size:13px; margin-bottom:4px;">
+            Dataset: <a href="https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers"
+            style="color:#2196F3; text-decoration:none;">
+            Credit Card Customers — Kaggle</a>
+        </p>
+        <p style="color:#455A64; font-size:13px; margin:0;">
+            Análisis realizado con Python · Pandas · Seaborn · Plotly · Streamlit
+        </p>
+    </div>
+""", unsafe_allow_html=True)
