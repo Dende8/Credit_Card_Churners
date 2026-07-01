@@ -1,3 +1,3 @@
 # Credit Card Churners
-### ¿Qué características poseen los clientes de un banco que acaban cancelando el servicio de tarjeta de crédito?
+### ¿Cuál es el perfil de cliente que cancela su tarjeta de crédito?
 
