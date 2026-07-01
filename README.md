@@ -1,4 +1,5 @@
-# 💳 Credit Card Churn Analysis (https://creditcardchurners.streamlit.app/)
+# 💳 Credit Card Churn Analysis
+### (https://creditcardchurners.streamlit.app/)
 > Análisis exploratorio de datos para identificar el perfil de cliente bancario que cancela su tarjeta de crédito.
 
 ---
@@ -141,6 +142,8 @@ La app se abrirá automáticamente en `http://localhost:8501`
 
 ```
 Credit_Card_Churners/
+├── .streamlit/
+│   └── config.toml                  # Configuración de tema oscuro por defecto
 ├── data/
 │   ├── raw/
 │   │   └── BankChurners.csv          # Dataset original de Kaggle
