@@ -32,14 +32,12 @@ Cada fila representa un cliente único con información demográfica (edad, gén
 
 ## 🔧 El proceso
 
-### Preprocesamiento (`notebooks/01_preprocessing.ipynb`)
+### Preprocesamiento (`notebooks/preprocessing.ipynb`)
 
 **Limpieza y tipado:**
 - Eliminación de las dos columnas `Naive_Bayes_Classifier_*` — salidas de un clasificador previo que introducen *data leakage* sobre la variable objetivo.
 - Eliminación de `CLIENTNUM` — identificador sin valor analítico.
 - Conversión de `Attrition_Flag` y `Gender` a binario (0/1).
-- Conversión de `Education_Level`, `Income_Category` y `Card_Category` a `Categorical` ordenable — permite preservar la jerarquía real de cada variable.
-- Conversión de `Marital_Status` a `Categorical` no ordenable.
 
 **Tratamiento de outliers:**
 - Se optó por **IQR** como método principal para variables con distribuciones asimétricas o no normales (la mayoría de variables financieras y transaccionales).
